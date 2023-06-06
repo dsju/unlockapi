@@ -9,9 +9,9 @@ else
     if UnlockAPI.Version > version then return end
 end
 
-Isaac.ConsoleOutput("TSC Unlocks API v" .. version .. ": ")
+Isaac.ConsoleOutput("Unlocks API v" .. version .. ": ")
 
-UnlockAPI = { --Imitation is the sincerest form of flattery, ruisich 2023
+UnlockAPI = { --Imitation is the sincerest form of flattery, dsju 2023
     Mod = RegisterMod("TSC Unlocks API (" .. modname.. ")", 1),
     Helper = {},
     Library = {},
