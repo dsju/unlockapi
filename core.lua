@@ -5,14 +5,14 @@ local version = 0.27
 if not UnlockAPI then
     UnlockAPI = {}
 else
-    UnlockAPI.ModRegistry[modname] = { Characters = {}, Challenges = {}, } --Luadebug shouldn't matter
+    UnlockAPI.ModRegistry[modname] = { Characters = {}, Challenges = {}, } --luamod shouldn't matter
     if UnlockAPI.Version > version then return end
 end
 
-Isaac.ConsoleOutput("Unlocks API v" .. version .. ": ")
+Isaac.ConsoleOutput("TSC Unlocks API v" .. version .. ": ")
 
 UnlockAPI = { --Imitation is the sincerest form of flattery, dsju 2023
-    Mod = RegisterMod("TSC Unlocks API (" .. modname.. ")", 1),
+    Mod = RegisterMod("Unlocks API (" .. modname.. ")", 1),
     Helper = {},
     Library = {},
     Enums = {},
@@ -50,6 +50,7 @@ local scripts = {
     "system.lock.trinket",
     "system.lock.card",
     "system.lock.tainted",
+    "system.lock.entity",
 
     "helper.fulfilledRequirements",
     "helper.getPlayerUnlockData",

@@ -16,7 +16,6 @@ local function CheckBitmask(requirementBitmask, saveTable)
 
     for name, requirement in pairs(UnlockAPI.Constants.REQUIREMENTS_VALID_NONMASK) do
         if requirementBitmask | requirement | extraMask == requirementBitmask then
-            print(saveTable[tostring(math.floor(requirement | extraMask))])
             if not saveTable[tostring(math.floor(requirement | extraMask))] then --Flooring to get rid of the annoying .0 at the end
                 return false
             end

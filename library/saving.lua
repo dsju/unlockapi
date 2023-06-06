@@ -6,7 +6,6 @@ local json = require("json")
 function UnlockAPI.Library:GetSaveData(modName)
     local unlockData = {}
 
-    print(modName)
     for tableName, unlockTable in pairs(UnlockAPI.ModRegistry[modName]) do
         unlockData[tableName] = {}
         for unlockName in pairs(unlockTable) do

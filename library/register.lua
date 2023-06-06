@@ -55,7 +55,7 @@ function UnlockAPI.Library:RegisterCard(playerUnlockName, cardId, unlockRequirem
     }
 end
 
----Registers an entity that will be locked until a player beats fulfils the requirements to unlock it
+---Registers an entity that will be "locked" until a player beats fulfils the requirements to unlock it
 ---@param playerUnlockName      string?                 Name of the character that unlocks the entity, add "t." to the start if it is a tainted character, can be ommited for challenge unlocks
 ---@param entityType            number                  Type of the entity to lock
 ---@param entityVariant         number                  Variant of the entity to lock, leave nil to lock all entities of the same variant

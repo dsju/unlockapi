@@ -22,7 +22,9 @@ UnlockAPI.Enums = {
     },
 
     ModCallbacksCustom = {
-
+        MC_PRE_LOCKED_ENTITY_SPAWN = "UNLOCKAPI_PRE_LOCKED_ENTITY_SPAWN",
+        MC_POST_LOCKED_ENTITY_INIT_LATE = "UNLOCKAPI_POST_LOCKED_ENTITY_INIT_LATE",
+        MC_BEAT_REQUIREMENT = "UNLOCKAPI_BEAT_REQUIREMENT",
     },
 
     CallbackPriority = {
