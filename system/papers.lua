@@ -21,7 +21,7 @@ local currentFrame = 0
 
 --Function (callback)
 function UnlockAPI.Callback:PostAchievementRender()
-    if #UnlockAPI.AchievementPapers == 0 then return end
+    if #UnlockAPI.AchievementPapers == 0 and currentFrame <= UnlockAPI.Constants.ACHIEVEMENT_PAPER_FRAME_START  then return end
 
     if currentFrame == UnlockAPI.Constants.ACHIEVEMENT_PAPER_FRAME_START then
 
@@ -34,10 +34,8 @@ function UnlockAPI.Callback:PostAchievementRender()
         achievementSprite:Play(UnlockAPI.Constants.ACHIEVEMENT_PAPER_DISAPPEAR_ANIM, true)
 
     elseif currentFrame == UnlockAPI.Constants.ACHIEVEMENT_PAPER_FRAME_NEXT_UNLOCK then
-
-        currentFrame = UnlockAPI.Constants.ACHIEVEMENT_PAPER_FRAME_START - 1
-        table.remove(UnlockAPI.AchievementPapers, 1)
-
+        currentFrame = UnlockAPI.Constants.ACHIEVEMENT_PAPER_FRAME_START
+        return
     end
 
     if currentFrame % UnlockAPI.Constants.ACHIEVEMENT_PAPER_UPDATE_MODULO == 0 then
@@ -45,12 +43,14 @@ function UnlockAPI.Callback:PostAchievementRender()
     end
     achievementSprite:Render(Vector(Isaac.GetScreenWidth(), Isaac.GetScreenHeight())/UnlockAPI.Constants.ACHIEVEMENT_PAPER_SCREEN_DIV)
 
+    currentFrame = currentFrame + 1
+
+    if currentFrame % UnlockAPI.Constants.ACHIEVEMENT_PAPER_UPDATE_MODULO ~= 0 then return end
+
     for _, entityPlayer in pairs(Isaac.FindByType(EntityType.ENTITY_PLAYER)) do
         local player = entityPlayer:ToPlayer()
         player:SetMinDamageCooldown(player:GetDamageCooldown() + 1)
     end
-
-    currentFrame = currentFrame + 1
 end
 
 --Init

@@ -1,8 +1,8 @@
 ---Registers a tainted character that will show a "locked" screen when selected and get unlocked through the vanilla method (Red Key room in Home)
 ---@param playerName                string  Name of the character that will unlock the tainted
 ---@param taintedPlayerName         string  Name of the tainted character (will be locked). DO NOT put "t." at the front!
----@param taintedPlayerSpritesheet  any     Path to the spritesheet of the tainted character (eg. /gfx/characters/character_001_isaac.png). Leave nil to use the players'
----@param achievementGfx            any     Path to the spritesheet of the unlock paper that appears when the player unlocks the tainted character, start with !!NOPAPER!! to show text instead (ex. !!NOPAPER!!Cool Item appears!!, this will show "Cool Item appears!!")
+---@param taintedPlayerSpritesheet  any     Path to the spritesheet of the tainted character (eg. /gfx/characters/character_001_isaac.png)
+---@param achievementGfx            any     Path to the spritesheet of the unlock paper that appears when the player unlocks the tainted character. Leave nil to use the players'ars when the player unlocks the tainted character, start with !!NOPAPER!! to show text instead (ex. !!NOPAPER!!Cool Item appears!!, this will show "Cool Item appears!!")
 function UnlockAPI.Library:RegisterTaintedCharacter(playerName, taintedPlayerName, taintedPlayerSpritesheet, achievementGfx)
     local normalPlayerType = Isaac.GetPlayerTypeByName(playerName, false)
     local taintedPlayerType = Isaac.GetPlayerTypeByName(taintedPlayerName, true)
@@ -85,8 +85,6 @@ function UnlockAPI.Library:RegisterCustomEntry(playerUnlockName, entryName, unlo
         UnlockRequirements = unlockRequirements,
         AchievementGfx = achievementGfx
     }
-    if not playerUnlockName then return end
-    UnlockAPI.Characters[playerUnlockName] = true
 end
 
 ---Registers a display name for a player of a specific type. This is for characters that have the same names as others (for example Tarnished Isaac's name is still "Isaac", with this you can use "trIsaac" as the name and have seperate unlocks for him)

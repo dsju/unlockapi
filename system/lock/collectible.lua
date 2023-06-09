@@ -16,12 +16,14 @@ function UnlockAPI.Callback:PlayerCheckCollectiblesUpdate(player)
 end
 
 function UnlockAPI.Callback:PostCollectibleInit(pickup)
-    if UnlockAPI.Library:IsCollectibleUnlocked(pickup.SubType) then return end
+    if UnlockAPI.Library:IsCollectibleUnlocked(pickup.SubType) or Isaac.RunCallbackWithParam(UnlockAPI.Enums.ModCallbacksCustom.MC_PRE_CHANGE_PICKUP_COLLECTIBLE, pickup.SubType, pickup, pickup.SubType) then return end
     pickup:Morph(pickup.Type, pickup.Variant, 0, true, true)
 end
 
 --Functions (helper)
 function UnlockAPI.Helper.FullyReplaceCollectible(player, collectibleType)
+    if Isaac.RunCallbackWithParam(UnlockAPI.Enums.ModCallbacksCustom.MC_PRE_CHANGE_HELD_COLLECTIBLE, collectibleType, player, collectibleType) then return end
+
     for _ = 1, player:GetCollectibleNum(collectibleType) do
         local activeSlot = UnlockAPI.Helper.GetActiveItemSlot(player, collectibleType)
         player:RemoveCollectible(collectibleType)
