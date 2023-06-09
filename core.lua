@@ -1,12 +1,13 @@
 local root = "unlockapi" -- Replace this with the path of the "unlockapi" folder in your mod
 local modname = "MyMod" --Replace with your mod name
-local version = 0.28
+local version = 0.29
 
 if not UnlockAPI then
     UnlockAPI = {}
 else
     UnlockAPI.ModRegistry[modname] = { Characters = {}, Challenges = {}, } --luamod shouldn't matter
     if UnlockAPI.Version > version then return end
+    UnlockAPI.Callback:RemoveAllCallbacks()
 end
 
 Isaac.ConsoleOutput("TSC Unlocks API v" .. version .. ": ")
@@ -37,6 +38,7 @@ UnlockAPI = { --Imitation is the sincerest form of flattery, dsju 2023
 
 local scripts = {
     "enums",
+    "system.callback",
 
     "system.clearSave",
     "system.papers",

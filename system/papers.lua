@@ -35,6 +35,8 @@ function UnlockAPI.Callback:PostAchievementRender()
 
     elseif currentFrame == UnlockAPI.Constants.ACHIEVEMENT_PAPER_FRAME_NEXT_UNLOCK then
         currentFrame = UnlockAPI.Constants.ACHIEVEMENT_PAPER_FRAME_START
+        table.remove(UnlockAPI.AchievementPapers, 1)
+
         return
     end
 
