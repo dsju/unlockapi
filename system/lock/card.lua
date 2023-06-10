@@ -9,7 +9,7 @@ UnlockAPI.Constants.MAX_TRIES_GET_SAME_TYPE_COLLECTIBLE = 100
 function UnlockAPI.Callback:PlayerCheckCardUpdate(player)
     for card in pairs(UnlockAPI.Unlocks.Cards) do
         local cardSlot = UnlockAPI.Helper.GetCardSlot(player, card)
-        if cardSlot then
+        if cardSlot and not UnlockAPI.Library:IsCardUnlocked(card) then
             if not Isaac.RunCallbackWithParam(UnlockAPI.Enums.ModCallbacksCustom.MC_PRE_CHANGE_HELD_CARD, card, player, card) then
                 player:SetCard(cardSlot, itemPool:GetCard(Random(), false, false, false))
             end

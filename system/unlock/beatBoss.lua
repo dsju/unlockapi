@@ -24,7 +24,7 @@ UnlockAPI.Constants.REQUIREMENT_TYPE_TO_BOSS_DATA = {
 
     [UnlockAPI.Enums.RequirementType.SATAN] = {
         Type = EntityType.ENTITY_SATAN,
-        Variant = { 0 },
+        Variant = { 0, 10 },
         Stage = LevelStage.STAGE5,
     },
 
