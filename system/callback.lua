@@ -10,7 +10,7 @@ function UnlockAPI.Mod:AddCallback(modCallback, callbackFunction, callbackArgume
     })
 end
 
-function UnlockAPI.Callback:AddPriorityCallback(modCallback, callbackPriority, callbackFunction, callbackArguments)
+function UnlockAPI.Mod:AddPriorityCallback(modCallback, callbackPriority, callbackFunction, callbackArguments)
     Isaac.AddPriorityCallback(UnlockAPI.Mod, modCallback, callbackPriority, callbackFunction, callbackArguments)
     table.insert(functionsAndCallbacks, {
         Callback = modCallback,
