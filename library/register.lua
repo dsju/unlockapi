@@ -2,7 +2,7 @@
 ---@param playerName                string  Name of the character that will unlock the tainted
 ---@param taintedPlayerName         string  Name of the tainted character (will be locked). DO NOT put "t." at the front!
 ---@param taintedPlayerSpritesheet  any     Path to the spritesheet of the tainted character (eg. /gfx/characters/character_001_isaac.png)
----@param achievementGfx            any     Path to the spritesheet of the unlock paper that appears when the player unlocks the tainted character. Leave nil to use the players'ars when the player unlocks the tainted character, start with !!NOPAPER!! to show text instead (ex. !!NOPAPER!!Cool Item appears!!, this will show "Cool Item appears!!")
+---@param achievementGfx            any     Path to the spritesheet of the unlock paper that appears when the player unlocks the tainted character. Leave nil to use the player's when the player unlocks the tainted character, start with !!NOPAPER!! to show text instead (ex. !!NOPAPER!!Cool Item appears!!, this will show "Cool Item appears!!")
 function UnlockAPI.Library:RegisterTaintedCharacter(playerName, taintedPlayerName, taintedPlayerSpritesheet, achievementGfx)
     local normalPlayerType = Isaac.GetPlayerTypeByName(playerName, false)
     local taintedPlayerType = Isaac.GetPlayerTypeByName(taintedPlayerName, true)
