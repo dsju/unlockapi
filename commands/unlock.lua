@@ -35,6 +35,8 @@ end
 
 --Function (helper)
 function UnlockAPI.Helper.GetStringAndIfUnlocking(cmd)
+    if cmd:find("lockall") then return end
+
     local subbedStringUnlock = cmd:gsub("unlock", "")
     local subbedStringLock = cmd:gsub("lock", "")
 

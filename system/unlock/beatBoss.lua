@@ -71,6 +71,9 @@ UnlockAPI.Constants.REQUIREMENT_TYPE_TO_BOSS_DATA = {
     },
 }
 
+--Variables
+local queuedUnlocks = {}
+
 --Function (callback)
 function UnlockAPI.Callback:MarkBossDeath(npc)
     if game.Challenge ~= Challenge.CHALLENGE_NULL or game:GetVictoryLap() > 0 then return end
@@ -78,7 +81,16 @@ function UnlockAPI.Callback:MarkBossDeath(npc)
     local requirementType = UnlockAPI.Helper.GetCurrentBossRequirementType(npc)
     if not requirementType then return end
 
-    UnlockAPI.Helper.UpdateUnlocks(requirementType)
+    queuedUnlocks[requirementType] = true
+end
+
+function UnlockAPI.Callback:MarkBossPostUpdate()
+    if not UnlockAPI.Helper.ShouldTriggerUnlocks() then return end
+    UnlockAPI.Helper.TriggerQueuedUnlocks()
+end
+
+function UnlockAPI.Callback:MarkBossPreGameExit()
+    queuedUnlocks = {}
 end
 
 --Functions (helper)
@@ -102,6 +114,20 @@ function UnlockAPI.Helper.IsEntityOfTable(npc, data)
     return wasInTable
 end
 
+function UnlockAPI.Helper.ShouldTriggerUnlocks()
+    local room = game:GetRoom()
+    return (room:IsClear() and room:GetType() == RoomType.ROOM_BOSS) or level:GetStage() == LevelStage.STAGE8
+end
+
+function UnlockAPI.Helper.TriggerQueuedUnlocks()
+    for requirementType in pairs(queuedUnlocks) do
+        UnlockAPI.Helper.UpdateUnlocks(requirementType)
+        queuedUnlocks[requirementType] = nil
+    end
+end
+
 for _, bossData in pairs(UnlockAPI.Constants.REQUIREMENT_TYPE_TO_BOSS_DATA) do
     UnlockAPI.Mod:AddCallback(ModCallbacks.MC_POST_NPC_DEATH, UnlockAPI.Callback.MarkBossDeath, bossData.Type)
 end
+UnlockAPI.Mod:AddCallback(ModCallbacks.MC_POST_UPDATE, UnlockAPI.Callback.MarkBossPostUpdate)
+UnlockAPI.Mod:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, UnlockAPI.Callback.MarkBossPreGameExit)

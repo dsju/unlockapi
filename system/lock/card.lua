@@ -19,7 +19,7 @@ end
 
 function UnlockAPI.Callback:PostCardInit(pickup)
     if UnlockAPI.Library:IsCardUnlocked(pickup.SubType) or Isaac.RunCallbackWithParam(UnlockAPI.Enums.ModCallbacksCustom.MC_PRE_CHANGE_PICKUP_CARD, pickup.SubType, pickup, pickup.SubType) then return end
-    pickup:Morph(pickup.Type, pickup.Variant, 0, true, true)
+    pickup:Morph(pickup.Type, pickup.Variant, 0, true, false)
 end
 
 --Functions (helper)

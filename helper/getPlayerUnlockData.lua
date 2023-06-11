@@ -1,8 +1,6 @@
 UnlockAPI.Constants.TAINTED_PREFIX = "t."
 
 function UnlockAPI.Helper.GetPlayerUnlockData(player)
-    print(player)
-
     local displayName
     if type(player) ~= "string" then
         local playerType = player:GetPlayerType()

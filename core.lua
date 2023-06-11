@@ -1,6 +1,6 @@
 local root = "unlockapi" -- Replace this with the path of the "unlockapi" folder in your mod
 local modname = "MyMod" --Replace with your mod name
-local version = 0.29
+local version = 0.3
 
 if not UnlockAPI then
     UnlockAPI = {}
@@ -63,14 +63,17 @@ local scripts = {
     "helper.isTainted",
     "helper.trySpawnTaintedSlot",
     "helper.setRequirements",
+    "helper.mergeTablesInside",
 
     "library.register",
     "library.isUnlocked",
     "library.saving",
 
     "commands.unlock",
+    "commands.unlockall",
+    "commands.invalid",
 }
 
 for _, script in pairs(scripts) do include(root .. "." .. script) end
 
-Isaac.ConsoleOutput("Loaded!\n")
+Isaac.ConsoleOutput('Loaded! Type "unlockapi" in the console to see valid commands.\n')
