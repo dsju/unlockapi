@@ -1,4 +1,4 @@
-# Unlock API
+# TSC Unlock API
 A library that allows modders to create achievements and lock them behind bosses & challenges. Also allows the locking of a tainted character behind the closet.
 
 ### Installation
