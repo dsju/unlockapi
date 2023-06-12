@@ -4,7 +4,7 @@ A library that allows modders to create achievements and lock them behind bosses
 ### Installation
 To add this library to your mod, you must:
 
-If using the one file version:
+If using the [one file version](https://github.com/dsju/unlockapi/releases):
 > 1) Extract unlockapi.lua to a folder in your mod.
 > 2) Set the "modname" variable to the name of your mod (this is used for saving).
 > 3) Include unlockapi. through your main.lua file by adding the following line:
