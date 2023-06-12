@@ -28,8 +28,8 @@ end
 
 ---Checks if an entity has been unlocked or not
 ---@param type number Type of the entity
----@param variant number Variant of the entity
----@param subtype number SubType of the entity
+---@param variant? number Variant of the entity, nil to ignore
+---@param subtype? number SubType of the entity, nil to ignore
 function UnlockAPI.Library:IsEntityUnlocked(type, variant, subtype)
     for _, unlockData in pairs(UnlockAPI.Unlocks.Entities) do
         if type == unlockData.Type and variant == (unlockData.Variant or variant) and subtype == (unlockData.SubType or subtype) then

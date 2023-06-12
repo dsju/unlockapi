@@ -10,10 +10,10 @@ else
     UnlockAPI.Callback:RemoveAllCallbacks()
 end
 
-Isaac.ConsoleOutput("TSC Unlocks API v" .. version .. ": ")
+Isaac.ConsoleOutput("TSC Unlock API v" .. version .. ": ")
 
 UnlockAPI = { --Imitation is the sincerest form of flattery, dsju 2023
-    Mod = RegisterMod("Unlocks API (" .. modname.. ")", 1),
+    Mod = RegisterMod("TSC Unlock API (" .. modname.. ")", 1),
     Helper = {},
     Library = {},
     Enums = {},
@@ -71,7 +71,7 @@ local scripts = {
 
     "commands.unlock",
     "commands.unlockall",
-    "commands.invalid",
+    "commands.blank",
 }
 
 for _, script in pairs(scripts) do include(root .. "." .. script) end
