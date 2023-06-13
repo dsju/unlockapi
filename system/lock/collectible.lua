@@ -8,6 +8,8 @@ UnlockAPI.Constants.MAX_TRIES_GET_SAME_TYPE_COLLECTIBLE = 100
 
 --Function (callback)
 function UnlockAPI.Callback:PlayerCheckCollectiblesUpdate(player)
+    if not UnlockAPI.Save.Loaded then return end
+
     for collectibleType in pairs(UnlockAPI.Unlocks.Collectibles) do
         if player:HasCollectible(collectibleType) and not UnlockAPI.Library:IsCollectibleUnlocked(collectibleType) then
             UnlockAPI.Helper.FullyReplaceCollectible(player, collectibleType)
@@ -16,7 +18,7 @@ function UnlockAPI.Callback:PlayerCheckCollectiblesUpdate(player)
 end
 
 function UnlockAPI.Callback:PostCollectibleInit(pickup)
-    if UnlockAPI.Library:IsCollectibleUnlocked(pickup.SubType) or Isaac.RunCallbackWithParam(UnlockAPI.Enums.ModCallbacksCustom.MC_PRE_CHANGE_PICKUP_COLLECTIBLE, pickup.SubType, pickup, pickup.SubType) then return end
+    if not UnlockAPI.Save.Loaded or UnlockAPI.Library:IsCollectibleUnlocked(pickup.SubType) or Isaac.RunCallbackWithParam(UnlockAPI.Enums.ModCallbacksCustom.MC_PRE_CHANGE_PICKUP_COLLECTIBLE, pickup.SubType, pickup, pickup.SubType) then return end
     pickup:Morph(pickup.Type, pickup.Variant, 0, true, true)
 end
 

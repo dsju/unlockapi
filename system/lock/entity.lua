@@ -3,7 +3,7 @@ local spawningEntityData = {}
 
 --Functions (callback)
 function UnlockAPI.Callback:LockedPreEntitySpawn(type, variant, subtype, ...)
-    if UnlockAPI.Library:IsEntityUnlocked(type, variant, subtype) then return end
+    if not UnlockAPI.Save.Loaded or UnlockAPI.Library:IsEntityUnlocked(type, variant, subtype) then return end
 
     local callbackData = Isaac.RunCallbackWithParam(UnlockAPI.Enums.ModCallbacksCustom.MC_PRE_LOCKED_ENTITY_SPAWN, type, type, variant, subtype, ...)
     if not callbackData then
@@ -14,6 +14,8 @@ function UnlockAPI.Callback:LockedPreEntitySpawn(type, variant, subtype, ...)
 end
 
 function UnlockAPI.Callback:LockedEntityPostRender()
+    if not UnlockAPI.Save.Loaded then return end
+
     local checkedEntities = {}
 
     for _, entityData in pairs(spawningEntityData) do

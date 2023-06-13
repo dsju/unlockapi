@@ -1,6 +1,6 @@
 local root = "unlockapi" -- Replace this with the path of the "unlockapi" folder in your mod
 local modname = "MyMod" --Replace with your mod name
-local version = 0.3
+local version = 0.31
 
 if not UnlockAPI then
     UnlockAPI = {}
@@ -26,7 +26,7 @@ UnlockAPI = { --Imitation is the sincerest form of flattery, dsju 2023
         CustomEntry = {},
     },
     Constants = {},
-    Save = UnlockAPI.Save or { Characters = {}, Challenges = {}, },
+    Save = UnlockAPI.Save or { Loaded = false, Characters = {}, Challenges = {}, },
     Callback = {},
     Characters = UnlockAPI.Characters or {},
     Challenges = UnlockAPI.Challenges or {},
@@ -38,9 +38,9 @@ UnlockAPI = { --Imitation is the sincerest form of flattery, dsju 2023
 
 local scripts = {
     "enums",
-    "system.callback",
 
-    "system.clearSave",
+    "system.callback",
+    "system.save",
     "system.papers",
 
     "system.unlock.beatBoss",

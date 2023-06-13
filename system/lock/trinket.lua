@@ -4,6 +4,8 @@ local itemPool = game:GetItemPool()
 
 --Functions (callback)
 function UnlockAPI.Callback:PlayerCheckTrinketsUpdate(player)
+    if not UnlockAPI.Save.Loaded then return end
+
     for trinketType in pairs(UnlockAPI.Unlocks.Trinkets) do
         if player:HasTrinket(trinketType) and not UnlockAPI.Library:IsTrinketUnlocked(trinketType) then
             UnlockAPI.Helper.ReplaceTrinket(player, trinketType)
@@ -12,7 +14,7 @@ function UnlockAPI.Callback:PlayerCheckTrinketsUpdate(player)
 end
 
 function UnlockAPI.Callback:PostTrinketInit(pickup)
-    if UnlockAPI.Library:IsTrinketUnlocked(pickup.SubType) or Isaac.RunCallbackWithParam(UnlockAPI.Enums.ModCallbacksCustom.MC_PRE_CHANGE_PICKUP_TRINKET, pickup.SubType, pickup, pickup.SubType)  then return end
+    if not UnlockAPI.Save.Loaded or UnlockAPI.Library:IsTrinketUnlocked(pickup.SubType) or Isaac.RunCallbackWithParam(UnlockAPI.Enums.ModCallbacksCustom.MC_PRE_CHANGE_PICKUP_TRINKET, pickup.SubType, pickup, pickup.SubType)  then return end
     pickup:Morph(pickup.Type, pickup.Variant, 0, true, true)
 end
 

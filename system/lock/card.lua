@@ -7,6 +7,8 @@ UnlockAPI.Constants.MAX_TRIES_GET_SAME_TYPE_COLLECTIBLE = 100
 
 --Function (callback)
 function UnlockAPI.Callback:PlayerCheckCardUpdate(player)
+    if not UnlockAPI.Save.Loaded then return end
+
     for card in pairs(UnlockAPI.Unlocks.Cards) do
         local cardSlot = UnlockAPI.Helper.GetCardSlot(player, card)
         if cardSlot and not UnlockAPI.Library:IsCardUnlocked(card) then
@@ -18,7 +20,7 @@ function UnlockAPI.Callback:PlayerCheckCardUpdate(player)
 end
 
 function UnlockAPI.Callback:PostCardInit(pickup)
-    if UnlockAPI.Library:IsCardUnlocked(pickup.SubType) or Isaac.RunCallbackWithParam(UnlockAPI.Enums.ModCallbacksCustom.MC_PRE_CHANGE_PICKUP_CARD, pickup.SubType, pickup, pickup.SubType) then return end
+    if not UnlockAPI.Save.Loaded or UnlockAPI.Library:IsCardUnlocked(pickup.SubType) or Isaac.RunCallbackWithParam(UnlockAPI.Enums.ModCallbacksCustom.MC_PRE_CHANGE_PICKUP_CARD, pickup.SubType, pickup, pickup.SubType) then return end
     pickup:Morph(pickup.Type, pickup.Variant, 0, true, false)
 end
 

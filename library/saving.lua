@@ -21,6 +21,8 @@ end
 ---Loads existing unlock data
 ---@param saveData table UnlockAPI save Data
 function UnlockAPI.Library:LoadSaveData(saveData)
+    UnlockAPI.Save.Loaded = true
+
     if not saveData then return end
 
     for tableIndex, unlockTable in pairs(saveData) do
