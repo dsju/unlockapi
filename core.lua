@@ -1,6 +1,6 @@
 local root = "unlockapi" -- Replace this with the path of the "unlockapi" folder in your mod
 local modname = "MyMod" --Replace with your mod name
-local version = 0.31
+local version = 0.32
 
 if not UnlockAPI then
     UnlockAPI = {}
@@ -28,6 +28,7 @@ UnlockAPI = { --Imitation is the sincerest form of flattery, dsju 2023
     Constants = {},
     Save = UnlockAPI.Save or { Loaded = false, Characters = {}, Challenges = {}, },
     Callback = {},
+    Compatibility = {},
     Characters = UnlockAPI.Characters or {},
     Challenges = UnlockAPI.Challenges or {},
     DisplayNames = UnlockAPI.DisplayNames or {},
@@ -42,6 +43,8 @@ local scripts = {
     "system.callback",
     "system.save",
     "system.papers",
+
+    "compatibility.pause_screen_completion_marks_api",
 
     "system.unlock.beatBoss",
     "system.unlock.tainted",

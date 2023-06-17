@@ -101,6 +101,9 @@ end
 function UnlockAPI.Library:RegisterPlayer(modName, playerName)
     UnlockAPI.Characters[playerName] = true
     UnlockAPI.ModRegistry[modName].Characters[playerName] = true
+
+    if not PauseScreenCompletionMarksAPI then return end
+    UnlockAPI.Compatibility.AddPauseScreenCompletionMarks(playerName)
 end
 
 ---Registers a challenge and allows its completion to be tracked and for achievements to be locked behind it
