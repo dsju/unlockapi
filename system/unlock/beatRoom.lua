@@ -4,10 +4,14 @@ local level = game:GetLevel()
 
 --Function (callback)
 function UnlockAPI.Callback:RoomPreSpawnCleanAward()
+    if game.Challenge ~= Challenge.CHALLENGE_NULL then return end
+
     local roomType = game:GetRoom():GetType()
     if roomType == RoomType.ROOM_BOSSRUSH then
         UnlockAPI.Helper.UpdateUnlocks(UnlockAPI.Enums.RequirementType.BOSSRUSH)
-    elseif level:GetStage() == LevelStage.STAGE7_GREED and roomType == RoomType.ROOM_BOSS and game.Difficulty >= Difficulty.DIFFICULTY_GREED then
+    end
+
+    if roomType == RoomType.ROOM_BOSS and level:GetStage() == LevelStage.STAGE7_GREED and game.Difficulty >= Difficulty.DIFFICULTY_GREED then
         UnlockAPI.Helper.UpdateUnlocks(UnlockAPI.Enums.RequirementType.GREED)
     end
 end
