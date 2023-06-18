@@ -50,7 +50,7 @@ function UnlockAPI.Helper.GetItemConfigOfSameType(collectibleType)
         end
     end
 
-    return CollectibleType.COLLECTIBLE_BREAKFAST
+    return itemConfig:GetCollectible(CollectibleType.COLLECTIBLE_BREAKFAST)
 end
 
 function UnlockAPI.Helper.GetActiveItemSlot(player, collectibleType)
