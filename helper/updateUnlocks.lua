@@ -49,9 +49,9 @@ function UnlockAPI.Helper.UpdateUnlocks(requirementType, specifiedPlayer)
     for _, tableName in pairs(UnlockAPI.Constants.TABLE_NAME_TO_CALLBACK) do alreadyUnlockedData[tableName] = {} end
 
     for _, fulfilledData in pairs(newRequirementsFulfiled) do
-        for _, achievementData in pairs(UnlockAPI.Helper.MergeTablesInside(UnlockAPI.Unlocks)) do
+        for _, achievementData in pairs(UnlockAPI.Helper.MergeTablesInside(UnlockAPI.Unlocks, UnlockAPI.Enums.RandomPopupPreventionAchievement)) do
 
-            if type(achievementData.UnlockRequirements) ~= "string" and (achievementData.UnlockRequirements or 0) & fulfilledData.Requirement ~= fulfilledData.Requirement then goto continue end
+            if type(achievementData.UnlockRequirements) == "string" or (achievementData.UnlockRequirements or 0) & fulfilledData.Requirement ~= fulfilledData.Requirement then goto continue end
             if alreadyUnlockedData[achievementData.AchievementID] or not (fulfilledData.PlayerName == achievementData.PlayerName and UnlockAPI.Helper.FulfilledAllRequirements(achievementData.UnlockRequirements, fulfilledData.UnlockData)) then goto continue end
 
             UnlockAPI.Helper.ShowUnlock(achievementData.AchievementGfx)

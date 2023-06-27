@@ -36,7 +36,7 @@ function UnlockAPI.Helper.GetStringAndIfUnlockingAll(cmd)
 end
 
 function UnlockAPI.Helper.SetAllModUnlocks(mod, isUnlocking)
-    for _, unlockData in pairs(UnlockAPI.Helper.MergeTablesInside(UnlockAPI.Unlocks)) do
+    for _, unlockData in pairs(UnlockAPI.Helper.MergeTablesInside(UnlockAPI.Unlocks, UnlockAPI.Enums.RandomPopupPreventionAchievement)) do
         local playerName = unlockData.PlayerName or unlockData.NormalPlayerName
         if not (not mod or UnlockAPI.ModRegistry[mod].Characters[playerName]) then goto continue end
 

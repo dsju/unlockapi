@@ -18,7 +18,7 @@ local playingWithLockedTainted
 --Functions (callback)
 function UnlockAPI.Callback:PostLockedTaintedPlayerInit(player)
     local playerName = player:GetName()
-    if not (not playingWithLockedTainted and UnlockAPI.Helper.IsTainted(player) and UnlockAPI.Library:IsTaintedUnlocked(playerName) and player.FrameCount > 0) then return end
+    if not (not playingWithLockedTainted and UnlockAPI.Helper.IsTainted(player) and not UnlockAPI.Library:IsTaintedUnlocked(playerName) and game:GetNumPlayers() > 1) then return end
     player:ChangePlayerType(UnlockAPI.Helper.GetTaintedData(playerName).NormalPlayerType)
 end
 
@@ -51,6 +51,11 @@ function UnlockAPI.Callback:PostLockedTaintedNewRoom(mod)
 	if not (playingWithLockedTainted and level:GetCurrentRoomIndex() ~= UnlockAPI.ConstantsCLOSET_GRIDINDEX) then return end
 	UnlockAPI.Helper.MakeDoorInvisible()
     UnlockAPI.Helper.TrySpawnTaintedSlot(Isaac.GetPlayer(0))
+end
+
+function UnlockAPI.Callback:PostLockedTaintedRender(mod)
+	if not (playingWithLockedTainted and game.Difficulty <= Difficulty.DIFFICULTY_HARD and level:GetCurrentRoomIndex() ~= UnlockAPI.Constants.TAINTED_CLOSET_GRIDINDEX) then return end
+	UnlockAPI.Helper.GoToHomeCloset()
 end
 
 function UnlockAPI.Callback:PreLockedTaintedGameExit(mod)
@@ -105,3 +110,4 @@ UnlockAPI.Mod:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, UnlockAPI.Callback
 UnlockAPI.Mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, UnlockAPI.Callback.PostLockedTaintedNewRoom)
 UnlockAPI.Mod:AddPriorityCallback(ModCallbacks.MC_POST_GAME_STARTED, UnlockAPI.Enums.CallbackPriority.LATEST, UnlockAPI.Callback.PostLockedTaintedGameStarted)
 UnlockAPI.Mod:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, UnlockAPI.Callback.PreLockedTaintedGameExit)
+UnlockAPI.Mod:AddCallback(ModCallbacks.MC_POST_RENDER, UnlockAPI.Callback.PostLockedTaintedRender)
