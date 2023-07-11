@@ -1,6 +1,6 @@
 local root = "unlockapi" -- Replace this with the path of the "unlockapi" folder in your mod
 local modname = "MyMod" --Replace with your mod name
-local version = 0.35
+local version = 0.36
 
 if not UnlockAPI then
     UnlockAPI = {}

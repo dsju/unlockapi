@@ -13,7 +13,7 @@ function UnlockAPI.Helper.MergeTablesInside(...)
 
     local currentId = 0
 
-    for currentTable in pairs({...}) do
+    for _, currentTable in pairs({...}) do
         for tableName, tableToMerge in pairs(currentTable) do
             for id, value in pairs(tableToMerge) do
                 currentId = currentId + 1
